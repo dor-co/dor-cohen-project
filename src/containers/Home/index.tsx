@@ -1,4 +1,3 @@
-import logo from "../../logo.svg";
 import "./style.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -9,7 +8,6 @@ const Home = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>Home Page</p>
         <a
           className="App-link"

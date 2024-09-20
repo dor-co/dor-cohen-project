@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
-import { routes } from "./routes";
+import { routes } from "./common/routes";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 

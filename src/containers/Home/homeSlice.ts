@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IHomeState } from "../../types";
+import { IHomeState } from "../../common/types";
 
 const initialState: IHomeState = {
   title: "home page",

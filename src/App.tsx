@@ -1,8 +1,11 @@
-import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { useSelector } from "react-redux";
+import { RootState } from "./redux/store";
 
 function App() {
+  const data = useSelector((state: RootState) => state);
+
   return (
     <div className="App">
       <header className="App-header">

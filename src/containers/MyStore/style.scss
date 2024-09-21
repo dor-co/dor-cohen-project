@@ -3,10 +3,10 @@
   height: 100vh;
 
   .products-list-container {
-    overflow-y: scroll;
     width: 100%;
     &.side-open {
       width: 70%;
+      overflow-y: scroll;
     }
   }
 }
@@ -17,4 +17,5 @@
   padding: 20px;
   font-size: 24px;
   box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.45);
+  z-index: 1;
 }

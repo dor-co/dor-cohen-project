@@ -8,7 +8,7 @@ export interface IProductItem {
   name: string;
   description?: string;
   price: number;
-  creationDate: string;
+  creationDate: Date;
 }
 
 export interface IProductProps {
@@ -25,5 +25,5 @@ export interface IDetailsFormValues {
   name: string;
   description?: string;
   price: number;
-  creationDate?: string;
+  creationDate?: Date;
 }

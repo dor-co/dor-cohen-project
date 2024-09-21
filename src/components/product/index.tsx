@@ -3,6 +3,8 @@ import { IProductItem, IProductProps } from "../../common/types";
 import "./style.scss";
 import { RootState } from "../../redux/store";
 import { setProductsList } from "../../containers/MyStore/myStoreSlice";
+import { Button } from "antd";
+import moment from "moment";
 
 const Product: React.FC<IProductProps> = ({ product, onClick, isSelected }) => {
   const { productsList } = useSelector((state: RootState) => state.myStore);
@@ -27,8 +29,14 @@ const Product: React.FC<IProductProps> = ({ product, onClick, isSelected }) => {
       <h2>{product.name}</h2>
       <p>{product.description}</p>
       <p>price: {product.price}</p>
-      <p>creation date: {product.creationDate?.toString()}</p>
-      <button onClick={(e) => onDeleteProduct(e, product.id)}>DELETE</button>
+      <p>creation date: {moment(product.creationDate).format("DD/MM/YYYY")}</p>
+      <Button
+        className="delete-btn"
+        danger
+        onClick={(e) => onDeleteProduct(e, product.id)}
+      >
+        DELETE
+      </Button>
     </div>
   );
 };

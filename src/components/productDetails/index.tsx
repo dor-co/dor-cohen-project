@@ -1,10 +1,14 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import { IDetailsFormValues, IProductDetailsProps } from "../../common/types";
 import "./style.scss";
 import { schema } from "../../common/constants";
-import { setProductsList } from "../../containers/MyStore/myStoreSlice";
+import {
+  setProductsList,
+  setSelectedProduct,
+} from "../../containers/MyStore/myStoreSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { Button, DatePicker, Input } from "antd";
 
 const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
   const { productsList } = useSelector((state: RootState) => state.myStore);
@@ -18,6 +22,7 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
 
     localStorage.setItem("productsList", JSON.stringify(productsListTemp));
     dispatch(setProductsList(productsListTemp));
+    dispatch(setSelectedProduct(null));
   };
 
   const initialValues: IDetailsFormValues = {
@@ -29,21 +34,29 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
 
   return (
     <div className="product-details-container">
+      <h2>Edit:</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={schema}
         onSubmit={(values: IDetailsFormValues) => {
+          console.log(values);
           onUpdateProduct(values);
         }}
-        validate={(values) => {
-          //console.log(values);
+        validate={(values: IDetailsFormValues) => {
+          console.log(values);
         }}
       >
-        {({ setFieldValue }) => (
+        {({ values, handleChange, setFieldValue }) => (
           <Form>
-            <div>
+            <div className="field-container">
               <label htmlFor="name">Name:</label>
-              <Field type="text" id="name" name="name" />
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                value={values.name}
+                onChange={handleChange}
+              />
               <ErrorMessage
                 className="error-message"
                 name="name"
@@ -51,9 +64,15 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
               />
             </div>
 
-            <div>
+            <div className="field-container">
               <label htmlFor="description">Description:</label>
-              <Field type="text" id="description" name="description" />
+              <Input
+                type="text"
+                id="description"
+                name="description"
+                value={values.description}
+                onChange={handleChange}
+              />
               <ErrorMessage
                 className="error-message"
                 name="description"
@@ -61,9 +80,15 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
               />
             </div>
 
-            <div>
+            <div className="field-container">
               <label htmlFor="price">Price:</label>
-              <Field type="number" id="price" name="price" />
+              <Input
+                type="number"
+                id="price"
+                name="price"
+                value={values.price}
+                onChange={handleChange}
+              />
               <ErrorMessage
                 className="error-message"
                 name="price"
@@ -71,15 +96,15 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
               />
             </div>
 
-            <div>
+            <div className="field-container">
               <label htmlFor="creationDate">Creation Date:</label>
-              <Field
-                type="date"
+              <DatePicker
+                format={"YYYY/MM/DD"}
                 id="creationDate"
                 name="creationDate"
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setFieldValue("creationDate", event.currentTarget.value)
-                }
+                onChange={(date, dateString) => {
+                  setFieldValue("creationDate", dateString);
+                }}
               />
               <ErrorMessage
                 className="error-message"
@@ -88,7 +113,9 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
               />
             </div>
 
-            <button type="submit">Submit</button>
+            <Button className="submit-btn" type="primary" htmlType="submit">
+              Submit
+            </Button>
           </Form>
         )}
       </Formik>

@@ -1,15 +1,25 @@
 .product-container {
-  background-color: #ededed;
+  background-color: #e3e3e3;
   padding: 20px;
   margin: 20px;
   transition: 0.3s;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  position: relative;
 
   h2 {
     margin: 0px;
   }
 
   &.selected {
-    background-color: rgb(128, 177, 250);
+    background-color: rgb(179 210 255);
     transition: 0.3s;
+  }
+
+  .delete-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
   }
 }

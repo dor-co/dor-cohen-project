@@ -10,6 +10,15 @@
     height: fit-content;
   }
 
+  &.add {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    border-radius: unset;
+    box-shadow: none;
+  }
+
   .error-message {
     color: red;
   }

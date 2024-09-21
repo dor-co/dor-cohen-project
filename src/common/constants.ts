@@ -40,10 +40,10 @@ export const staticData: IProductItem[] = [
 ];
 
 export const schema = Yup.object().shape({
-  name: Yup.string().max(30, "Too Long!").required("Required"),
-  description: Yup.string().max(200, "Too Long!"),
+  name: Yup.string().max(30, "Name is too long!").required("Name is required"),
+  description: Yup.string().max(200, "Description is too long!"),
   price: Yup.number()
-    .positive("Must be a positive number")
-    .required("Required"),
-  creationDate: Yup.date().required("Required").nullable(),
+    .positive("Price must be a positive number!")
+    .required("Price is required"),
+  creationDate: Yup.date().required("Creation Date is required").nullable(),
 });

@@ -18,7 +18,9 @@ export interface IProductProps {
 }
 
 export interface IProductDetailsProps {
-  product: IProductItem;
+  product?: IProductItem;
+  isAddProduct?: boolean;
+  onCloseAddModal?: () => void;
 }
 
 export interface IDetailsFormValues {
@@ -26,4 +28,5 @@ export interface IDetailsFormValues {
   description?: string;
   price: number;
   creationDate?: Date;
+  id?: number;
 }

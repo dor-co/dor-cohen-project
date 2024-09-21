@@ -6,7 +6,7 @@ import { staticData } from "../../common/constants";
 import Product from "../../components/product";
 import ProductDetails from "../../components/productDetails";
 import { setProductsList, setSelectedProduct } from "./myStoreSlice";
-import { Button, Input, Select } from "antd";
+import { Button, Input, Select, Modal } from "antd";
 
 const MyStore: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ const MyStore: React.FC = () => {
     (state: RootState) => state.myStore
   );
 
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [sort, setSort] = useState<string>("Sort Products By...");
 
@@ -49,13 +50,42 @@ const MyStore: React.FC = () => {
     setSort(value);
   };
 
+  const onOpenAddModal = (): void => {
+    setIsModalOpen(true);
+  };
+
+  const onCloseAddModal = (): void => {
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     getData();
   }, []);
 
   return (
     <>
-      <div className="top-header">My Store</div>
+      <Modal
+        title="Add Product"
+        open={isModalOpen}
+        onCancel={onCloseAddModal}
+        footer={null}
+      >
+        <ProductDetails
+          key={"add"}
+          isAddProduct={true}
+          onCloseAddModal={onCloseAddModal}
+        />
+      </Modal>
+      <div className="top-header">
+        <ul>
+          <li>
+            <a href="/">My Store</a>
+          </li>
+          <li>
+            <a href="/">About</a>
+          </li>
+        </ul>
+      </div>
       <div className="my-store-container">
         <div
           className={`products-list-container ${
@@ -63,7 +93,9 @@ const MyStore: React.FC = () => {
           }`}
         >
           <div className="filter-header">
-            <Button className="filter-btn">ADD</Button>
+            <Button onClick={onOpenAddModal} className="filter-btn">
+              ADD
+            </Button>
             <Input
               value={search}
               onChange={onSearch}

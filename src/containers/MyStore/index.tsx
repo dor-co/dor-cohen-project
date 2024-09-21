@@ -1,16 +1,17 @@
 import "./style.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useEffect, useState } from "react";
 import { staticData } from "../../common/constants";
-import { IProductItem } from "../../common/types";
 import Product from "../../components/product";
 import ProductDetails from "../../components/productDetails";
+import { setProductsList, setSelectedProduct } from "./myStoreSlice";
 
 const MyStore: React.FC = () => {
-  //const data = useSelector((state: RootState) => state);
-  const [productsList, setProductsList] = useState<IProductItem[]>([]);
-  const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
+  const dispatch = useDispatch();
+  const { productsList, selectedProduct } = useSelector(
+    (state: RootState) => state.myStore
+  );
 
   const getData = (): void => {
     try {
@@ -21,17 +22,17 @@ const MyStore: React.FC = () => {
         productsList = JSON.stringify(staticData);
       }
 
-      setProductsList(JSON.parse(productsList));
+      dispatch(setProductsList(JSON.parse(productsList)));
     } catch (err) {
-      console.error("Error fetching data from local storage:", err);
+      console.error("error getting data from local storage:", err);
     }
   };
 
   const onSelectProduct = (id: number) => {
     if (selectedProduct === id) {
-      setSelectedProduct(null);
+      dispatch(setSelectedProduct(null));
     } else {
-      setSelectedProduct(id);
+      dispatch(setSelectedProduct(id));
     }
   };
 
@@ -59,7 +60,12 @@ const MyStore: React.FC = () => {
             );
           })}
         </div>
-        {selectedProduct && <ProductDetails id={selectedProduct} />}
+        {selectedProduct && (
+          <ProductDetails
+            key={selectedProduct}
+            product={productsList.filter((p) => p.id === selectedProduct)[0]}
+          />
+        )}
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 export interface IMyStoreState {
-  title: string;
+  productsList: IProductItem[];
+  selectedProduct: number | null;
 }
 
 export interface IProductItem {
@@ -7,12 +8,8 @@ export interface IProductItem {
   name: string;
   description?: string;
   price: number;
-  creationDate: Date;
+  creationDate: string;
 }
-
-// export interface IProductsList {
-//   productsList: IProductItem[];
-// }
 
 export interface IProductProps {
   product: IProductItem;
@@ -21,5 +18,12 @@ export interface IProductProps {
 }
 
 export interface IProductDetailsProps {
-  id: number;
+  product: IProductItem;
+}
+
+export interface IDetailsFormValues {
+  name: string;
+  description?: string;
+  price: number;
+  creationDate?: string;
 }

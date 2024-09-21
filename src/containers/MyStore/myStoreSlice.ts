@@ -1,16 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IMyStoreState } from "../../common/types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IMyStoreState, IProductItem } from "../../common/types";
 
 const initialState: IMyStoreState = {
-  title: "My Store ",
+  productsList: [],
+  selectedProduct: null,
 };
 
 const myStoreSlice = createSlice({
   name: "MyStore",
   initialState,
-  reducers: {},
+  reducers: {
+    setProductsList(state, action: PayloadAction<IProductItem[]>) {
+      state.productsList = action.payload;
+    },
+    setSelectedProduct(state, action: PayloadAction<number | null>) {
+      state.selectedProduct = action.payload;
+    },
+  },
 });
 
-export const {} = myStoreSlice.actions;
+export const { setProductsList, setSelectedProduct } = myStoreSlice.actions;
 
 export default myStoreSlice.reducer;

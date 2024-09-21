@@ -1,0 +1,15 @@
+.product-container {
+  background-color: #ededed;
+  padding: 20px;
+  margin: 20px;
+  transition: 0.3s;
+
+  h2 {
+    margin: 0px;
+  }
+
+  &.selected {
+    background-color: rgb(128, 177, 250);
+    transition: 0.3s;
+  }
+}

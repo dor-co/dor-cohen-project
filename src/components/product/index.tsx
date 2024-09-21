@@ -10,7 +10,6 @@ const Product: React.FC<IProductProps> = ({ product, onClick, isSelected }) => {
 
   const onDeleteProduct = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
-
     let productsListTemp = JSON.parse(JSON.stringify(productsList));
     productsListTemp = productsListTemp.filter(
       (p: IProductItem) => p.id !== id

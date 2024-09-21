@@ -3,26 +3,21 @@ import { IDetailsFormValues, IProductDetailsProps } from "../../common/types";
 import "./style.scss";
 import { schema } from "../../common/constants";
 import { setProductsList } from "../../containers/MyStore/myStoreSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
+  const { productsList } = useSelector((state: RootState) => state.myStore);
   const dispatch = useDispatch();
 
-  const onUpdateLocalStorage = (values: any) => {
-    try {
-      const productsList = JSON.parse(
-        localStorage.getItem("productsList") || "[]"
-      );
+  const onUpdateProduct = (values: any) => {
+    let productsListTemp = JSON.parse(JSON.stringify(productsList));
+    productsListTemp = productsList.map((prod: any) =>
+      prod.id === product.id ? { ...prod, ...values } : prod
+    );
 
-      const updatedProductsList = productsList.map((prod: any) =>
-        prod.id === product.id ? { ...prod, ...values } : prod
-      );
-
-      localStorage.setItem("productsList", JSON.stringify(updatedProductsList));
-      dispatch(setProductsList(updatedProductsList));
-    } catch (err) {
-      console.error("error updating local storage:", err);
-    }
+    localStorage.setItem("productsList", JSON.stringify(productsListTemp));
+    dispatch(setProductsList(productsListTemp));
   };
 
   const initialValues: IDetailsFormValues = {
@@ -38,7 +33,7 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
         initialValues={initialValues}
         validationSchema={schema}
         onSubmit={(values: IDetailsFormValues) => {
-          onUpdateLocalStorage(values);
+          onUpdateProduct(values);
         }}
         validate={(values) => {
           //console.log(values);

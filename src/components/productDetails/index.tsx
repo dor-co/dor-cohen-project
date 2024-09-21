@@ -43,11 +43,7 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
         initialValues={initialValues}
         validationSchema={schema}
         onSubmit={(values: IDetailsFormValues) => {
-          console.log(values);
           onUpdateProduct(values);
-        }}
-        validate={(values: IDetailsFormValues) => {
-          console.log(values);
         }}
       >
         {({ values, handleChange, setFieldValue }) => (

@@ -1,17 +1,21 @@
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { staticData } from "../../common/constants";
 import Product from "../../components/product";
 import ProductDetails from "../../components/productDetails";
 import { setProductsList, setSelectedProduct } from "./myStoreSlice";
+import { Button, Input, Select } from "antd";
 
 const MyStore: React.FC = () => {
   const dispatch = useDispatch();
   const { productsList, selectedProduct } = useSelector(
     (state: RootState) => state.myStore
   );
+
+  const [search, setSearch] = useState<string>("");
+  const [sort, setSort] = useState<string>("Sort Products By...");
 
   const getData = (): void => {
     try {
@@ -36,6 +40,15 @@ const MyStore: React.FC = () => {
     }
   };
 
+  const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+  };
+
+  const onSort = (value: string) => {
+    setSort(value);
+  };
+
   useEffect(() => {
     getData();
   }, []);
@@ -49,16 +62,55 @@ const MyStore: React.FC = () => {
             selectedProduct ? "side-open" : ""
           }`}
         >
-          {productsList.map((product, key) => {
-            return (
-              <Product
-                key={key}
-                product={product}
-                onClick={() => onSelectProduct(product.id)}
-                isSelected={selectedProduct === product.id}
-              />
-            );
-          })}
+          <div className="filter-header">
+            <Button className="filter-btn">ADD</Button>
+            <Input
+              value={search}
+              onChange={onSearch}
+              className="filter-input"
+              placeholder="Search Produts"
+            />
+            <Select
+              defaultValue="Sort Products"
+              className="filter-select"
+              style={{ width: 120 }}
+              value={sort}
+              onChange={onSort}
+              options={[
+                { value: "Sort Products By...", label: "Sort Products By..." },
+                { value: "Name", label: "Name" },
+                { value: "Creation Date", label: "Creation Date" },
+              ]}
+            />
+          </div>
+
+          {productsList
+            .filter(
+              (p) =>
+                p.name.toLowerCase().includes(search.toLowerCase()) ||
+                p.description?.toLowerCase()?.includes(search.toLowerCase())
+            )
+            .sort((a, b) => {
+              if (sort === "Name") {
+                return a.name.localeCompare(b.name);
+              } else if (sort === "Creation Date") {
+                return (
+                  new Date(a.creationDate).getTime() -
+                  new Date(b.creationDate).getTime()
+                );
+              }
+              return 0;
+            })
+            .map((product, key) => {
+              return (
+                <Product
+                  key={key}
+                  product={product}
+                  onClick={() => onSelectProduct(product.id)}
+                  isSelected={selectedProduct === product.id}
+                />
+              );
+            })}
         </div>
         {selectedProduct && (
           <ProductDetails

@@ -11,6 +11,27 @@
         display: none;
       }
     }
+
+    .filter-header {
+      position: sticky;
+      top: 0px;
+      background: #9fa1b5;
+      z-index: 1;
+      padding: 20px;
+      box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.45);
+      display: flex;
+      gap: 20px;
+      .filter-btn {
+        border-color: #159b45;
+        color: #159b45;
+      }
+      .filter-input {
+        width: 200px;
+      }
+      .filter-select {
+        width: 200px !important;
+      }
+    }
   }
 }
 
@@ -19,6 +40,5 @@
   background-color: #e1e1e1;
   padding: 20px;
   font-size: 24px;
-  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.45);
-  z-index: 1;
+  z-index: 2;
 }

@@ -1,7 +1,7 @@
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { staticData } from "../../common/constants";
 import Product from "../../components/product";
 import ProductDetails from "../../components/productDetails";

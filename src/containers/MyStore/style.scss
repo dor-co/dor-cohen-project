@@ -7,6 +7,9 @@
     &.side-open {
       width: 70%;
       overflow-y: scroll;
+      @media (max-width: 992px) {
+        display: none;
+      }
     }
   }
 }

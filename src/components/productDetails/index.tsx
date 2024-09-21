@@ -25,6 +25,10 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
     dispatch(setSelectedProduct(null));
   };
 
+  const onCancel = (): void => {
+    dispatch(setSelectedProduct(null));
+  };
+
   const initialValues: IDetailsFormValues = {
     name: product.name,
     description: product.description,
@@ -114,7 +118,10 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ product }) => {
             </div>
 
             <Button className="submit-btn" type="primary" htmlType="submit">
-              Submit
+              SAVE
+            </Button>
+            <Button onClick={onCancel} className="cancel-btn">
+              CANCEL
             </Button>
           </Form>
         )}

@@ -7,9 +7,12 @@
   border-radius: 8px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 20px;
+
+  .product-image-text {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
 
   h2 {
     margin: 0px;
@@ -24,6 +27,11 @@
     position: absolute;
     bottom: 15px;
     right: 15px;
+    @media (max-width: 992px) {
+      position: unset;
+      width: 100%;
+      margin-top: 10px;
+    }
   }
 
   .image {

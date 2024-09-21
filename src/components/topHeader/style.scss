@@ -1,0 +1,24 @@
+.top-header {
+  position: relative;
+  background-color: #e1e1e1;
+  padding: 20px;
+  font-size: 24px;
+  z-index: 2;
+
+  ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    padding: 0px;
+    margin: 0px;
+
+    a {
+      color: #000;
+      text-decoration: none;
+      font-size: 28px;
+      &:hover {
+        color: rgb(82, 82, 82);
+      }
+    }
+  }
+}

@@ -26,14 +26,16 @@ const Product: React.FC<IProductProps> = ({ product, onClick, isSelected }) => {
       className={`product-container ${isSelected ? "selected" : ""}`}
       onClick={onClick}
     >
-      <img className="image" src={require("../../images/product.png")} />
-      <div>
-        <h2>{product.name}</h2>
-        <p>{product.description}</p>
-        <p>Price: {product.price}</p>
-        <p>
-          Creation date: {moment(product.creationDate).format("DD/MM/YYYY")}
-        </p>
+      <div className="product-image-text">
+        <img className="image" src={require("../../images/product.png")} />
+        <div>
+          <h2>{product.name}</h2>
+          <p>{product.description}</p>
+          <p>Price: {product.price}</p>
+          <p>
+            Creation date: {moment(product.creationDate).format("DD/MM/YYYY")}
+          </p>
+        </div>
       </div>
       <Button
         className="delete-btn"

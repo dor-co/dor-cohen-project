@@ -76,16 +76,6 @@ const MyStore: React.FC = () => {
           onCloseAddModal={onCloseAddModal}
         />
       </Modal>
-      <div className="top-header">
-        <ul>
-          <li>
-            <a href="/">My Store</a>
-          </li>
-          <li>
-            <a href="/">About</a>
-          </li>
-        </ul>
-      </div>
       <div className="my-store-container">
         <div
           className={`products-list-container ${
